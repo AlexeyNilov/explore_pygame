@@ -1,8 +1,9 @@
 import pygame
 from pygame.locals import Color
 import sys
+import time
 
-from model.creature import Oak
+from model.creature import Oak, Pig
 from model.wall import Wall
 
 
@@ -12,8 +13,13 @@ screen = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption("Game")
 clock = pygame.time.Clock()
 
+text_color = Color('black')
+font = pygame.font.SysFont("Verdana", 40)
+message = font.render("Wall!", True, text_color)
+
 background_color = Color('grey')
 oak = Oak()
+pig = Pig()
 
 walls = pygame.sprite.Group()
 for x in range(0, 1400, 100):
@@ -31,16 +37,21 @@ while True:
 
     # Do logical updates here.
     # ...
-    oak.move()
+    pig.move()
 
-    if pygame.sprite.spritecollideany(oak, walls):
-        oak.speed *= -1
+    if pygame.sprite.spritecollideany(pig, walls):
+        pig.speed *= -1
+        screen.blit(message, (400, 300))
+        pygame.display.update()
+        time.sleep(0.5)
 
     screen.fill(background_color)  # Fill the display with a solid color
 
     # Render the graphics here.
     # ...
     oak.draw(screen)
+    pig.draw(screen)
+
     for wall in walls:
         wall.draw(screen)
 
