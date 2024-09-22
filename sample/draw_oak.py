@@ -3,7 +3,7 @@ from pygame.locals import Color
 import sys
 import time
 
-from model.creature import Oak, Pig
+from model.creature import Oak, Pig, Wolf
 from model.wall import Wall
 
 
@@ -19,6 +19,7 @@ message = font.render("Wall!", True, text_color)
 
 background_color = Color('grey')
 oak = Oak()
+wolf = Wolf()
 pig = Pig()
 
 walls = pygame.sprite.Group()
@@ -50,6 +51,7 @@ while True:
     # Render the graphics here.
     # ...
     oak.draw(screen)
+    wolf.draw(screen)
     pig.draw(screen)
 
     for wall in walls:
